@@ -1,0 +1,24 @@
+{
+    "name": "josh/console",
+    "description": "Josh console component",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alireza Josheghani",
+            "email": "josheghani.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "files": [
+          "src/josh.php"
+        ]
+      },
+    "bin": [
+        "josh"
+    ]
+}
