@@ -3,7 +3,7 @@
 /**
  * @author Alireza Josheghani <josheghani.dev@gmail.com>
  * @version 1.1
- * @package Lemax Console | ChmodCommandLocaly
+ * @package Lemax Console | ChmodCommandLocally
  */
 
 namespace Josh\Commands;
@@ -14,11 +14,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class ChmodCommandLocaly extends Command {
+class ChmodCommandLocally extends Command {
 
     public function configure()
     {
-        $this->setName('chmod:localy')
+        $this->setName('chmod:locally')
             ->setDescription('Configuring permissions of your project for localy');
         $this->addArgument(
             'directory',
