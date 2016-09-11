@@ -13,7 +13,7 @@ return array(
     \Josh\Commands\HookSetupCommand::class,
 
     // Josh Chmod Command Localy
-    \Josh\Commands\ChmodCommandLocaly::class,
+    \Josh\Commands\ChmodCommandLocally::class,
 
     // Josh Chmod Command Hostly
     \Josh\Commands\ChmodCommandHostly::class,
