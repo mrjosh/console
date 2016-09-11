@@ -22,7 +22,7 @@ return array(
     \Josh\Commands\LampCommand::class,
 
     // Localy Ip Command
-    \Josh\Commands\LocalyIpCommand::class,
+    \Josh\Commands\LocallyIpCommand::class,
 
     // Public Ip Command
     \Josh\Commands\PublicIpCommand::class,
