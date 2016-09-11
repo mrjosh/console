@@ -1,24 +1,22 @@
 {
-    "name": "josh/console",
-    "description": "Josh console component",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Alireza Josheghani",
-            "email": "josheghani.dev@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.5"
-    },
-    "autoload": {
-        "files": [
-          "src/josh.php"
-        ]
-      },
-    "bin": [
-        "josh"
-    ]
+  "name": "josh/console",
+  "description": "Josh console component",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alireza Josheghani",
+      "email": "josheghani.dev@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "symfony/console": "^3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Josh\\": "src/"
+    }
+  },
+  "bin": [ "josh" ]
 }
