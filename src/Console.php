@@ -3,7 +3,7 @@
 /**
  * @author : Alireza Josheghani <josheghani.dev@gmail.com>
  * @package : Josh console component
- * @version : 1.1
+ * @version : 1.1.2
  */
 
 namespace Josh;
