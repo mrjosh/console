@@ -2,7 +2,7 @@
 
 /**
  * @author Alireza Josheghani <josheghani.dev@gmail.com>
- * @version 1.1
+ * @version 1.1.2
  * @package Josh Console | Commands
  * This file just for register Josh-commands
  */
