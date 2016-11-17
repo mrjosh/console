@@ -21,7 +21,16 @@ class Console
     public function __construct()
     {
         $this->app = new Application('Josh console component',1.1);
-        $commands = require __DIR__ . "/Commands.php";
+
+        $commands = [
+            \Josh\Commands\HookSetupCommand::class,
+            \Josh\Commands\ChmodCommandLocally::class,
+            \Josh\Commands\ChmodCommandHostly::class,
+            \Josh\Commands\LampCommand::class,
+            \Josh\Commands\LocallyIpCommand::class,
+            \Josh\Commands\PublicIpCommand::class,
+        ];
+
         foreach ($commands as $command)
             $this->app->add(new $command);
     }
