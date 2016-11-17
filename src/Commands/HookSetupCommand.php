@@ -42,7 +42,7 @@ class HookSetupCommand extends Command
      */
     protected function execute(InputInterface $input , OutputInterface $output)
     {
-        $authFile = $_SERVER['HOME'] . '/.Josh/auth.json';
+        $authFile = $this->getHomeDir() . '/.Josh/auth.json';
 
         if($input->getOption('clear')){
             unlink($authFile);
@@ -144,6 +144,15 @@ class HookSetupCommand extends Command
         }
 
         $command->info("Success");
+    }
+
+    public function getHomeDir()
+    {
+        if(empty($_SERVER['HOME'])){
+            return posix_getpwuid(posix_getuid());
+        }
+
+        return $_SERVER['HOME'];
     }
 
 }
