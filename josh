@@ -2,18 +2,22 @@
 <?php
 
 /**
+ * Lemax Console Component v1.1
+ *
  * @author Alireza Josheghani <josheghani.dev@gmail.com>
- * @version 1.1
- * @package Lemax Console Component v1.1
+ * @since 17 Nov 2016
  */
 
-use Josh\Console;
+use Josh\Console\Console;
 
-if(file_exists(__DIR__.'/../../autoload.php')):
+if(file_exists(__DIR__.'/../../autoload.php')){
     require __DIR__.'/../../autoload.php';
-else:
+} elseif(file_exists(__DIR__.'/vendor/autoload.php')){
+    require __DIR__.'/vendor/autoload.php';
+} else {
     require __DIR__.'/autoload.php';
-endif;
+}
 
 $console = new Console;
+
 $console->start();

@@ -1,19 +1,21 @@
 <?php
 
 /**
+ * Lamp Command
+ *
  * @author Alireza Josheghani <josheghani.dev@gmail.com>
- * @version 1.1
- * @package Lemax Console | Lamp Command => Just for linux
+ * @since  17 Nov 2016
  */
 
-namespace Josh\Commands;
-use Josh\ConsoleStyle as Style;
+namespace Josh\Console\Commands;
+use Josh\Console\ConsoleStyle as Style;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class LampCommand extends Command {
+class LampCommand extends Command
+{
 
     public function configure()
     {
@@ -23,7 +25,8 @@ class LampCommand extends Command {
 
     protected function execute(InputInterface $input , OutputInterface $output)
     {
-        $command = new Style($input,$output);
+        $command = new Style($input, $output);
+
         $command->info(exec("sudo /opt/opt/lamp start"));
     }
 

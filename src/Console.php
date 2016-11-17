@@ -1,47 +1,50 @@
 <?php
 
 /**
+ * Josh console component
+ *
  * @author : Alireza Josheghani <josheghani.dev@gmail.com>
- * @package : Josh console component
- * @version : 1.1.2
+ * @since  17 Nov 2016
  */
 
-namespace Josh;
+namespace Josh\Console;
+
 use Symfony\Component\Console\Application;
 
-class Console
+class Console extends Application
 {
-
-    // instance of the SymfonyApplication
-    protected $app;
 
     /**
      * Console constructor.
+     *
+     * @return void
      */
     public function __construct()
     {
-        $this->app = new Application('Josh console component',1.1);
+        parent::__construct('Josh console component', '0.0.1');
 
         $commands = [
-            \Josh\Commands\HookSetupCommand::class,
-            \Josh\Commands\ChmodCommandLocally::class,
-            \Josh\Commands\ChmodCommandHostly::class,
-            \Josh\Commands\LampCommand::class,
-            \Josh\Commands\LocallyIpCommand::class,
-            \Josh\Commands\PublicIpCommand::class,
+            \Josh\Console\Commands\HookSetupCommand::class,
+            \Josh\Console\Commands\ChmodCommandLocally::class,
+            \Josh\Console\Commands\ChmodCommandHostly::class,
+            \Josh\Console\Commands\LampCommand::class,
+            \Josh\Console\Commands\LocallyIpCommand::class,
+            \Josh\Console\Commands\PublicIpCommand::class,
         ];
 
-        foreach ($commands as $command)
-            $this->app->add(new $command);
+        foreach ($commands as $command) {
+            $this->add(new $command);
+        }
     }
 
     /**
-     * @return void
      * Register all commands
+     *
+     * @return object
      */
     public function start()
     {
-        $this->app->run();
+        return $this->run();
     }
 }
 
