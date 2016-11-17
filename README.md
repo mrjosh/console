@@ -23,11 +23,9 @@ export PATH=$PATH:$HOME/.composer/vendor/bin
 ```
 
 ## Get started with Josh console
-
 ```
 josh list
 ```
 
 ## License
-
-JoshConsole is under the MIT license.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
