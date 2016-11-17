@@ -1,14 +1,20 @@
-# Josh Console
+# Josh console component
+[![Build Status](https://travis-ci.org/iamalirezaj/console.svg?branch=master)](https://travis-ci.org/iamalirezaj/console)
 [![Latest Stable Version](https://poser.pugx.org/josh/console/v/stable)](https://packagist.org/packages/josh/console)
 [![Total Downloads](https://poser.pugx.org/josh/console/downloads)](https://packagist.org/packages/josh/console)
 [![Latest Unstable Version](https://poser.pugx.org/josh/console/v/unstable)](//packagist.org/packages/josh/console)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamalirezaj/console/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamalirezaj/console/?branch=master)
 [![License](https://poser.pugx.org/josh/console/license)](https://packagist.org/packages/josh/console)
 
-## Install composer
+## Requirement
+* php 5.5 >=
+* HHVM
+
+## Install with composer
+You can install this package throw the [Composer](http://getcomposer.org) by running:
 
 ```
-Download and Get started with this link 
-http://getcomposer.org
+composer global require josh/console
 ```
 
 ## Add the composer bin to your path
@@ -16,16 +22,9 @@ http://getcomposer.org
 export PATH=$PATH:$HOME/.composer/vendor/bin
 ```
 
-## Install globaly JoshConsole with composer
-
-```
-composer g require josh/console
-```
-
 ## Get started with Josh console
 
 ```
-// type the below command to you console
 josh list
 ```
 
