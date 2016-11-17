@@ -76,6 +76,8 @@ class HookSetupCommand extends Command
             $answer = $helper->ask($input, $output, $question);
 
             if($answer){
+                touch($authFile);
+                chmod($authFile,777);
                 file_put_contents($authFile,json_encode([
                     'api' => $api,
                     'username' => $username
