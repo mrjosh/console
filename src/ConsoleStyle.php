@@ -127,10 +127,14 @@ class ConsoleStyle extends SymfonyCommand
     public function addInput($message)
     {
         $this->info('>>> ' . $message . ' :');
+
         $userHandle = fopen("php://stdin", "r");
+
         $input = fgets($userHandle);
+
         fclose($userHandle);
-        return $input;
+
+        return trim($input);
     }
 
 }
