@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/josh/console/v/stable)](https://packagist.org/packages/josh/console)
 [![Total Downloads](https://poser.pugx.org/josh/console/downloads)](https://packagist.org/packages/josh/console)
 [![Latest Unstable Version](https://poser.pugx.org/josh/console/v/unstable)](//packagist.org/packages/josh/console)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamalirezaj/console/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamalirezaj/console/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamalirezaj/console/badges/quality-score.png)](https://scrutinizer-ci.com/g/iamalirezaj/console/?branch=master)
 [![License](https://poser.pugx.org/josh/console/license)](https://packagist.org/packages/josh/console)
 
 ## Requirement
