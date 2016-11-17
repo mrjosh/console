@@ -7,7 +7,7 @@
 [![License](https://poser.pugx.org/josh/console/license)](https://packagist.org/packages/josh/console)
 
 ## Requirement
-* php 5.5 >=
+* php 5.6 >=
 * HHVM
 
 ## Install with composer
