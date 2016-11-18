@@ -69,15 +69,15 @@ class HookSetupCommand extends Command
             $helper = $this->getHelper('question');
 
             $question = new ConfirmationQuestion(
-                'Are you wanna to save this details of default ? [ Yes or No ] :',
-                ['yes' , 'no']
+                'Are you wanna to save this details ? [ Yes or No ]: ',
+                false
             );
 
             $answer = $helper->ask($input, $output, $question);
 
             if($answer){
                 touch($authFile);
-                chmod($authFile,777);
+                chmod($authFile,0777);
                 file_put_contents($authFile,json_encode([
                     'api' => $api,
                     'username' => $username
@@ -148,6 +148,10 @@ class HookSetupCommand extends Command
         $command->info("Success");
     }
 
+    /** Get home directory
+     *
+     * @return array
+     */
     public function getHomeDir()
     {
         if(empty($_SERVER['HOME'])){
