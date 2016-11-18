@@ -22,9 +22,6 @@
       "Josh\\Console\\": "src/"
     }
   },
-  "post-root-package-install": [
-    "bash ./vendor/bin/console"
-  ],
   "bin": [
     "bin/josh"
   ]
