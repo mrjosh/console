@@ -60,8 +60,7 @@ class ConsoleStyle extends SymfonyCommand
     /**
      * Write a string as warning output.
      *
-     * @param  string          $string
-     * @param  null|int|string $verbosity
+     * @param  string $string
      * @return void
      */
     public function note($string)
@@ -100,7 +99,6 @@ class ConsoleStyle extends SymfonyCommand
      * Write a block string as green output.
      *
      * @param  string $message
-     * @return string
      */
     public function success($message)
     {

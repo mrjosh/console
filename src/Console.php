@@ -9,6 +9,10 @@
 
 namespace Josh\Console;
 
+use Josh\Console\Commands\HookSetupCommand;
+use Josh\Console\Commands\ServerAddCommand;
+use Josh\Console\Commands\ServerListCommand;
+use Josh\Console\Commands\ServerSSHCommand;
 use Symfony\Component\Console\Application;
 
 class Console extends Application
@@ -24,12 +28,10 @@ class Console extends Application
         parent::__construct('Josh console component', '0.0.1');
 
         $commands = [
-            \Josh\Console\Commands\HookSetupCommand::class,
-            \Josh\Console\Commands\ChmodCommandLocally::class,
-            \Josh\Console\Commands\ChmodCommandHostly::class,
-            \Josh\Console\Commands\LampCommand::class,
-            \Josh\Console\Commands\LocallyIpCommand::class,
-            \Josh\Console\Commands\PublicIpCommand::class,
+            HookSetupCommand::class,
+            ServerListCommand::class,
+            ServerAddCommand::class,
+            ServerSSHCommand::class
         ];
 
         foreach ($commands as $command) {
@@ -40,7 +42,8 @@ class Console extends Application
     /**
      * Register all commands
      *
-     * @return object
+     * @return int
+     * @throws \Exception
      */
     public function start()
     {
