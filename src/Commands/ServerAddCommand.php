@@ -17,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ServerAddCommand extends Command
 {
-
     /**
      * configure command
      *
@@ -43,9 +42,9 @@ class ServerAddCommand extends Command
     {
         $command = new Style($input, $output);
 
-        if (! file_exists($file = $this->getHomeDir() . "/.Josh/servers.json")) {
+        if (! file_exists($file = package_path("servers.json"))) {
 
-            if (! is_dir($dir = $this->getHomeDir() . "/.Josh")) {
+            if (! is_dir($dir = package_path())) {
                 mkdir($dir,0777);
             }
 
@@ -59,44 +58,31 @@ class ServerAddCommand extends Command
         $ip = $input->getOption('ip');
         $name = $input->getOption('name');
 
-        foreach ($servers as $server){
-           if ( $server[1] == $name ) {
-               $command->error("Server {$name} already exists.");
-               exit;
-           }
+        if (empty($name) || empty($ip)){
 
-            if ( $server[2] == $ip ) {
-                $command->error("Server IP {$ip} already exists.");
-                exit;
-            }
-        }
-
-        if(count($servers) == 0){
-            $id = 1;
+            $command->error("Server name and ip address is required. use [server:add --ip=***.***.*** --name=example]");
         } else {
-            $id = array_reverse($servers)[0][0] + 1;
+
+            foreach ($servers as $server){
+                if ( $server[1] == $name ) {
+                    $command->error("Server {$name} already exists.");
+                    exit;
+                }
+
+                if ( $server[2] == $ip ) {
+                    $command->error("Server IP {$ip} already exists.");
+                    exit;
+                }
+            }
+
+            $id = ( count($servers) == 0 ? 1 : array_reverse($servers)[0][0] + 1 );
+
+            $servers[] = [ $id, $name, $ip, null ];
+
+            file_put_contents($file,json_encode($servers));
+
+            $command->info("Server {$name} added successfully.");
         }
-
-        var_dump($id);
-
-        $servers[] = [ $id, $name, $ip, null ];
-
-        file_put_contents($file,json_encode($servers));
-
-        $command->info("Server {$name} added successfully.");
         exit;
-    }
-
-    /** Get home directory
-     *
-     * @return array
-     */
-    public function getHomeDir()
-    {
-        if(empty($_SERVER['HOME'])){
-            return posix_getpwuid(posix_getuid());
-        }
-
-        return $_SERVER['HOME'];
     }
 }

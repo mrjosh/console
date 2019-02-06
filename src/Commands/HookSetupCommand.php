@@ -17,10 +17,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-
 class HookSetupCommand extends Command
 {
-
     /**
      * configure command
      *
@@ -42,7 +40,7 @@ class HookSetupCommand extends Command
      */
     protected function execute(InputInterface $input , OutputInterface $output)
     {
-        $authFile = $this->getHomeDir() . '/.Josh/auth.json';
+        $authFile = package_path('/auth.json');
 
         if($input->getOption('clear')){
             unlink($authFile);
@@ -76,7 +74,7 @@ class HookSetupCommand extends Command
             $answer = $helper->ask($input, $output, $question);
 
             if($answer){
-                mkdir($this->getHomeDir() . "/.Josh",0777);
+                mkdir(package_path(),0777);
                 touch($authFile);
                 chmod($authFile,0777);
                 file_put_contents($authFile,json_encode([
@@ -87,23 +85,18 @@ class HookSetupCommand extends Command
 
         } else {
 
-            $auth = file_get_contents($authFile);
-
-            $auth = json_decode($auth, true);
+            $auth = json_decode(file_get_contents($authFile));
 
             $command->line("");
+            $command->line("Packagist API : ". $auth->api);
 
-            $command->line("Packagist API : ". $auth['api']);
-
-            $command->line('Packagist Username : '. $auth['username']);
-
+            $command->line('Packagist Username : '. $auth->username);
             $command->note(
                 'If you want change your details type `josh hook:setup --clear` '
             );
 
-            $api = $auth['api'];
-
-            $username = $auth['username'];
+            $api = $auth->api;
+            $username = $auth->username;
         }
 
         $this->sendRequest($command,$api,$username);
@@ -148,18 +141,4 @@ class HookSetupCommand extends Command
 
         $command->info("Success");
     }
-
-    /** Get home directory
-     *
-     * @return array
-     */
-    public function getHomeDir()
-    {
-        if(empty($_SERVER['HOME'])){
-            return posix_getpwuid(posix_getuid());
-        }
-
-        return $_SERVER['HOME'];
-    }
-
 }

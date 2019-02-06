@@ -20,7 +20,10 @@
   "autoload": {
     "psr-4": {
       "Josh\\Console\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "bin": [
     "bin/josh"

@@ -9,17 +9,29 @@
 
 namespace Josh\Console;
 
+use Symfony\Component\Console\Application;
 use Josh\Console\Commands\HookSetupCommand;
+use Josh\Console\Commands\ServerSSHCommand;
 use Josh\Console\Commands\ServerAddCommand;
 use Josh\Console\Commands\ServerListCommand;
-use Josh\Console\Commands\ServerSSHCommand;
-use Symfony\Component\Console\Application;
 
 class Console extends Application
 {
+    /**
+     * Commands
+     *
+     * @var array
+     */
+    protected $commands = [
+        HookSetupCommand::class,
+        ServerListCommand::class,
+        ServerAddCommand::class,
+        ServerSSHCommand::class
+    ];
 
     /**
      * Console constructor.
+     * Register the commands
      *
      * @return void
      */
@@ -27,27 +39,22 @@ class Console extends Application
     {
         parent::__construct('Josh console component', '0.0.1');
 
-        $commands = [
-            HookSetupCommand::class,
-            ServerListCommand::class,
-            ServerAddCommand::class,
-            ServerSSHCommand::class
-        ];
-
-        foreach ($commands as $command) {
+        foreach ($this->commands as $command) {
             $this->add(new $command);
         }
     }
 
     /**
-     * Register all commands
+     * Run the console
      *
-     * @return int
-     * @throws \Exception
+     * @return void
      */
     public function start()
     {
-        return $this->run();
+        try {
+
+            $this->run();
+        } catch (\Exception $e){}
     }
 }
 

@@ -39,9 +39,9 @@ class ServerListCommand extends Command
     {
         $command = new Style($input, $output);
 
-        if (! file_exists($file = $this->getHomeDir() . "/.Josh/servers.json")) {
+        if (! file_exists($file = package_path("servers.json"))) {
 
-            if (! is_dir($dir = $this->getHomeDir() . "/.Josh")) {
+            if (! is_dir($dir = package_path())) {
                 mkdir($dir,0777);
             }
 
@@ -59,23 +59,9 @@ class ServerListCommand extends Command
 
             $table = new Table($output);
 
-            $table->setHeaders(array('Id', 'Name', 'Ip address', 'Last connect'))
-                ->setRows($servers);
-
-            $table->render();
+            $table->setHeaders(['Id', 'Name', 'Ip address', 'Last connect'])
+                ->setRows($servers)
+                ->render();
         }
-    }
-
-    /** Get home directory
-     *
-     * @return array
-     */
-    public function getHomeDir()
-    {
-        if(empty($_SERVER['HOME'])){
-            return posix_getpwuid(posix_getuid());
-        }
-
-        return $_SERVER['HOME'];
     }
 }

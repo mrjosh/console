@@ -10,11 +10,9 @@
 namespace Josh\Console\Commands;
 
 use Josh\Console\ConsoleStyle as Style;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ServerSSHCommand extends Command
@@ -43,16 +41,15 @@ class ServerSSHCommand extends Command
     {
         $command = new Style($input, $output);
 
-        $file = $file = $this->getHomeDir() . "/.Josh/servers.json";
+        if(file_exists($file = $this->getHomeDir() . "/.Josh/servers.json")){
 
-        $servers = json_decode(file_get_contents($file), true);
+            $servers = json_decode(file_get_contents($file), true);
+            $serverIdOrName = $input->getArgument('server');
 
-        $serverIdOrName = $input->getArgument('server');
+            if (count($servers) == 0) {
 
-        if (count($servers) == 0) {
-
-            $command->line("No server added to the list. use [ server:add ] to add one.");
-        } else {
+                $command->line("No server added to the list. use [ server:add ] to add one.");
+            }
 
             $currentServer = [];
 
@@ -68,6 +65,10 @@ class ServerSSHCommand extends Command
             $command->info("Connecting to [$currentServer[1]]...");
 
             system("ssh root@$currentServer[2]");
+
+        } else {
+
+            $command->line("No server added to the list. use [ server:add ] to add one.");
         }
     }
 
