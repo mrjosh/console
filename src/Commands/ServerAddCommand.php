@@ -10,12 +10,12 @@
 namespace Josh\Console\Commands;
 
 use Josh\Console\ConsoleStyle as Style;
-use Symfony\Component\Console\Command\Command;
+use Josh\Console\Models\Server;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ServerAddCommand extends Command
+class ServerAddCommand extends ServerCommand
 {
     /**
      * configure command
@@ -42,18 +42,7 @@ class ServerAddCommand extends Command
     {
         $command = new Style($input, $output);
 
-        if (! file_exists($file = package_path("servers.json"))) {
-
-            if (! is_dir($dir = package_path())) {
-                mkdir($dir,0777);
-            }
-
-            touch($file);
-            chmod($file,0777);
-            file_put_contents($file,json_encode([]));
-        }
-
-        $servers = json_decode(file_get_contents($file), true);
+        $servers = $this->model->all();
 
         $ip = $input->getOption('ip');
         $name = $input->getOption('name');
@@ -63,23 +52,22 @@ class ServerAddCommand extends Command
             $command->error("Server name and ip address is required. use [server:add --ip=***.***.*** --name=example]");
         } else {
 
+            /** @var Server $server */
             foreach ($servers as $server){
-                if ( $server[1] == $name ) {
+                if ( $server->getAttribute("name") == $name ) {
                     $command->error("Server {$name} already exists.");
                     exit;
                 }
 
-                if ( $server[2] == $ip ) {
+                if ( $server->getAttribute("ip") == $ip ) {
                     $command->error("Server IP {$ip} already exists.");
                     exit;
                 }
             }
 
-            $id = ( count($servers) == 0 ? 1 : array_reverse($servers)[0][0] + 1 );
+            $id = ( $servers->count() == 0 ? 1 : array_reverse($servers->toArray())[0]->id + 1 );
 
-            $servers[] = [ $id, $name, $ip, null ];
-
-            file_put_contents($file,json_encode($servers));
+            $this->model->create(compact("id", "ip", "name"));
 
             $command->info("Server {$name} added successfully.");
         }

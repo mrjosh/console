@@ -10,12 +10,11 @@
 namespace Josh\Console\Commands;
 
 use Josh\Console\ConsoleStyle as Style;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ServerSSHCommand extends Command
+class ServerSSHCommand extends ServerCommand
 {
 
     /**
@@ -41,30 +40,21 @@ class ServerSSHCommand extends Command
     {
         $command = new Style($input, $output);
 
-        if(file_exists($file = $this->getHomeDir() . "/.Josh/servers.json")){
+        $servers = $this->model->all();
 
-            $servers = json_decode(file_get_contents($file), true);
-            $serverIdOrName = $input->getArgument('server');
+        $serverIdOrName = $input->getArgument('server');
 
-            if (count($servers) == 0) {
+        if ($servers->count() > 0) {
 
-                $command->line("No server added to the list. use [ server:add ] to add one.");
-            }
+            $server = $this->model->findBy("name", $serverIdOrName);
 
-            $currentServer = [];
+            $server = ( $server->exists() ? $server : $this->model->findBy("id", $serverIdOrName) );
 
-            foreach ($servers as $server){
+            $ip = $server->getAttribute("ip");
 
-                if ($server[0] == $serverIdOrName){
-                    $currentServer = $server;
-                } else if ($server[1] == $serverIdOrName){
-                    $currentServer = $server;
-                }
-            }
+            $command->info("Connecting to [$ip]...");
 
-            $command->info("Connecting to [$currentServer[1]]...");
-
-            system("ssh root@$currentServer[2]");
+            echo system("ssh root@$ip");
 
         } else {
 
